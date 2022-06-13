@@ -19,6 +19,7 @@ class CreateLivrosTable extends Migration
             $table->string('descricao')->nullable();
             $table->date('data_lancamento');
             $table->foreignId('id_editora')->constrained('editoras');
+            $table->integer('quantidade_total');
             $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
