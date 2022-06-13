@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Editora extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nome',
+        'ativo'
+    ];
+
+    public function livros()
+    {
+        return $this->hasMany(Livro::class);
+    }
 }
