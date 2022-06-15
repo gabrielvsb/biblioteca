@@ -6,12 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEditorasTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+
+    public function up(): void
     {
         Schema::create('editoras', function (Blueprint $table) {
             $table->id();
@@ -21,12 +17,7 @@ class CreateEditorasTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('editoras');
     }

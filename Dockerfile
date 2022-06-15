@@ -18,7 +18,10 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
+COPY 90-xdebug.ini "${PHP_INI_DIR}/conf.d"
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
