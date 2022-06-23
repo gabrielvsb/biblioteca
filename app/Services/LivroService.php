@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Http\Controllers\Services;
+namespace App\Services;
 
 
-use App\Http\Controllers\Repositories\LivroRepository;
+use App\Repositories\LivroRepository;
 use Illuminate\Http\Request;
 
 class LivroService

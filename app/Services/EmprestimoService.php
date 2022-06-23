@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Http\Controllers\Services;
+namespace App\Services;
 
 
-use App\Http\Controllers\Repositories\EmprestimoRepository;
+use App\Repositories\EmprestimoRepository;
 use Illuminate\Http\Request;
 
 class EmprestimoService

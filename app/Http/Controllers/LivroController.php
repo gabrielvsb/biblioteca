@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Services\LivroService;
+use App\Services\LivroService;
 use Illuminate\Http\Request;
 
 class LivroController extends Controller

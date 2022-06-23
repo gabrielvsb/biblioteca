@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
-namespace App\Http\Controllers\Repositories;
+
+namespace App\Repositories;
 
 
 use App\Models\Editora;
@@ -12,5 +12,11 @@ class EditoraRepository extends BaseRepository
     public function __construct(Editora $editora)
     {
         parent::__construct($editora);
+        $this->editora = $editora;
+    }
+
+    public function withBooks(int $editoraId): object|null
+    {
+        return $this->editora::with('livros')->find($editoraId);
     }
 }

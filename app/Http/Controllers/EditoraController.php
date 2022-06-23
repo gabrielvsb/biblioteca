@@ -2,7 +2,8 @@
 declare(strict_types=1);
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Services\EditoraService;
+use App\Exceptions\JsonException;
+use App\Services\EditoraService;
 use App\Http\Requests\EditoraRequest;
 use Illuminate\Http\JsonResponse;
 
@@ -17,11 +18,12 @@ class EditoraController extends Controller
 
     public function index(): JsonResponse
     {
-        $editoras = $this->editoraService->todosRegistros();
-        if ($editoras->isNull()){
-            return response()->json(['message' => 'Não foram encontrados registros de editoras!'], 404);
+        try {
+            $editoras = $this->editoraService->todosRegistros();
+            return response()->json(['data' => $editoras]);
+        }catch(JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
         }
-        return response()->json(['data' => $editoras]);
     }
 
     public function store(EditoraRequest $editoraRequest): JsonResponse
@@ -41,13 +43,20 @@ class EditoraController extends Controller
 
     public function update(EditoraRequest $editoraRequest, int $editoraId): JsonResponse
     {
-        $this->editoraService->editar($editoraId, $editoraRequest);
-        return response()->json(['message' => 'Editora atualizada com sucesso!'], 204);
+        $resposta = $this->editoraService->editar($editoraId, $editoraRequest);
+
+        if(!$resposta){
+            return response()->json(['message' => 'Não foi possível atualizar a editora!'], 400);
+        }
+        return response()->json(['message' => 'Editora atualizada com sucesso!']);
     }
 
     public function destroy(int $editoraId): JsonResponse
     {
-        $this->editoraService->deletar($editoraId);
-        return response()->json(['message' => 'Editora deletada com sucesso!'], 204);
+        $resposta = $this->editoraService->deletar($editoraId);
+        if(!$resposta){
+            return response()->json(['message' => 'Não foi possível deletar a editora!'], 400);
+        }
+        return response()->json(['message' => 'Editora deletada com sucesso!']);
     }
 }

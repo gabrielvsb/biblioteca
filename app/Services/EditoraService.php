@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Services;
+namespace App\Services;
 
-use App\Http\Controllers\Repositories\EditoraRepository;
+use App\Exceptions\JsonException;
+use App\Repositories\EditoraRepository;
 use App\Http\Requests\EditoraRequest;
 
 class EditoraService
@@ -23,12 +24,16 @@ class EditoraService
 
     public function todosRegistros(): object
     {
-        return $this->editoraRepository->all();
+        $editoras = $this->editoraRepository->all();
+        if(!$editoras){
+            throw new JsonException('Não foram encontrados registros de editoras!');
+        }
+        return $editoras;
     }
 
     public function detalhes(int $editoraId): object|null
     {
-        return $this->editoraRepository->find($editoraId);
+        return $this->editoraRepository->withBooks($editoraId);
     }
 
     public function editar(int $editoraId, EditoraRequest $editoraRequest): bool

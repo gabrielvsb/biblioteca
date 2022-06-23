@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Services\EmprestimoService;
+use App\Services\EmprestimoService;
 use Illuminate\Http\Request;
 
 class EmprestimoController extends Controller

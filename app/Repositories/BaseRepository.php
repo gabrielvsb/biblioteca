@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Repositories;
+namespace App\Repositories;
 
 
 class BaseRepository
 {
-    protected object $obj;
+    private object $obj;
 
     public function __construct(object $obj)
     {

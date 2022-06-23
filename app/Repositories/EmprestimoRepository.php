@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers\Repositories;
+namespace App\Repositories;
 
 
 use App\Models\Emprestimo;
