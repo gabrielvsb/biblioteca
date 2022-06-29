@@ -6,35 +6,43 @@ namespace App\Repositories;
 
 class BaseRepository
 {
-    private object $obj;
+    private object $model;
 
-    public function __construct(object $obj)
+    public function __construct(object $model)
     {
-        $this->obj = $obj;
+        $this->model = $model;
     }
 
     public function all(): object
     {
-        return $this->obj->all();
+        return $this->model->all();
     }
 
     public function find(int $id): object|null
     {
-        return $this->obj->find($id);
+        return $this->model->find($id);
     }
 
     public function save(array $atributos): object
     {
-        return $this->obj->create($atributos);
+        return $this->model->create($atributos);
     }
 
     public function update(int $id, array $atributos): bool
     {
-        return $this->obj->find($id)->update($atributos);
+        $model = $this->model->find($id);
+        if(!$model){
+            return false;
+        }
+        return $model->update($atributos);
     }
 
     public function delete(int $id): bool
     {
-        return $this->obj->find($id)->delete();
+        $model = $this->model->find($id);
+        if(!$model){
+            return false;
+        }
+        return $model->delete();
     }
 }
