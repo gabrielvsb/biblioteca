@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutorController;
 use App\Http\Controllers\EditoraController;
 use App\Http\Controllers\EmprestimoController;
 use App\Http\Controllers\LivroController;
@@ -11,6 +12,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::controller(EditoraController::class)->prefix('editora')->name('editora.')->group(function (){
+    Route::get('/',  'index')->name('index');
+    Route::get('/{id}', 'show')->name('show');
+    Route::put('/{id}', 'update')->name('update');
+    Route::post('/', 'store')->name('store');
+    Route::delete('/{id}', 'destroy')->name('destroy');
+});
+
+Route::controller(AutorController::class)->prefix('autor')->name('autor.')->group(function (){
     Route::get('/',  'index')->name('index');
     Route::get('/{id}', 'show')->name('show');
     Route::put('/{id}', 'update')->name('update');
