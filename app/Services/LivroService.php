@@ -1,49 +1,59 @@
 <?php
 
-
 namespace App\Services;
 
-
+use App\Exceptions\JsonException;
+use App\Http\Requests\LivroRequest;
 use App\Repositories\LivroRepository;
-use Illuminate\Http\Request;
 
 class LivroService
 {
-    protected $livroRepository;
+    protected LivroRepository $livroRepository;
 
-    /**
-     * LivroService constructor.
-     * @param LivroRepository $livroRepository
-     */
+
     public function __construct(LivroRepository $livroRepository)
     {
         $this->livroRepository = $livroRepository;
     }
 
-    public function cadastrar(Request $request)
+    public function cadastrar(LivroRequest $livroRequest): object
     {
-        $validate = $request->all();
-        $this->livroRepository->save($validate);
+        $validate = $livroRequest->validated();
+        return $this->livroRepository->save($validate);
     }
 
-    public function todosRegistros()
+    public function todosRegistros(): object
     {
-        return $this->livroRepository->all();
+        $livros = $this->livroRepository->all();
+        if($livros->isEmpty()){
+            throw new JsonException('Não foram encontrados registros de livros!');
+        }
+        return $livros;
     }
 
-    public function detalhes(int $id): object
+    public function detalhes(int $autorId): object|null
     {
-        return $this->livroRepository->find($id);
+        $autor = $this->livroRepository->find($autorId);
+        if(!$autor){
+            throw new JsonException('Não foi possível buscar o livro!');
+        }
+        return $autor;
     }
 
-    public function editar(int $id, Request $request): bool
+    public function editar(int $autorId, LivroRequest $livroRequest): bool
     {
-        $validate = $request->all();
-        return $this->livroRepository->update($id, $validate);
+        $validate = $livroRequest->validated();
+        if(!$this->livroRepository->update($autorId, $validate)){
+            throw new JsonException('Não foi possível atualizar o livro!');
+        }
+        return true;
     }
 
-    public function deletar(int $id): bool
+    public function deletar(int $autorId): bool
     {
-        return $this->livroRepository->delete($id);
+        if(!$this->livroRepository->delete($autorId)){
+            throw new JsonException('Não foi possível deletar o livro!');
+        }
+        return true;
     }
 }

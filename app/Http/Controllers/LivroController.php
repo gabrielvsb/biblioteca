@@ -2,51 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\JsonException;
+use App\Http\Requests\LivroRequest;
 use App\Services\LivroService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class LivroController extends Controller
 {
-    protected $livroService;
+    protected LivroService $livroService;
 
-    /**
-     * LivroController constructor.
-     * @param LivroService $livroService
-     */
     public function __construct(LivroService $livroService)
     {
         $this->livroService = $livroService;
     }
 
-
-    public function index()
+    public function index(): JsonResponse
     {
-        $livros = $this->livroService->todosRegistros();
-        return view('livro.index', ['livros' => $livros]);
+        try {
+            $livros = $this->livroService->todosRegistros();
+            return response()->json(['data' => $livros]);
+        }catch(JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
+    }
+
+    public function store(LivroRequest $livroRequest): JsonResponse
+    {
+        $this->livroService->cadastrar($livroRequest);
+        return response()->json(['message' => 'Livro cadastrado com sucesso!'], 201);
+    }
+
+    public function show(int $livroId): JsonResponse
+    {
+        try {
+            $livro = $this->livroService->detalhes($livroId);
+            return response()->json(['data' => $livro]);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
 
     }
 
-    public function store(Request $request)
+    public function update(LivroRequest $livroRequest, int $livroId): JsonResponse
     {
-        $this->livroService->cadastrar($request);
-        return redirect()->route('livro.index');
+        try {
+            $this->livroService->editar($livroId, $livroRequest);
+            return response()->json(['message' => 'Livro atualizado com sucesso!']);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
     }
 
-    public function show(int $id)
+    public function destroy(int $livroId): JsonResponse
     {
-        $livro = $this->livroService->detalhes($id);
-        return view('detalhes', ['livro' => $livro]);
-    }
-
-    public function update(Request $request, int $id)
-    {
-        $this->livroService->editar($id, $request);
-        return redirect()->route('livro.index');
-    }
-
-    public function destroy(int $id)
-    {
-        $this->livroService->deletar($id);
-        return redirect()->route('livro.index');
+        try{
+            $this->livroService->deletar($livroId);
+            return response()->json(['message' => 'Livro deletado com sucesso!']);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
     }
 }
