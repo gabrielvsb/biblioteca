@@ -15,6 +15,7 @@ services:
     working_dir: /var/www/
     volumes:
       - ./:/var/www
+      - ./tests/coverage:/opt/phpstorm-coverage
     networks:
       - biblioteca-gabriel
 
