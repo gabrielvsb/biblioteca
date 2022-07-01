@@ -34,29 +34,32 @@ class EditoraController extends Controller
 
     public function show(int $editoraId): JsonResponse
     {
-        $editora = $this->editoraService->detalhes($editoraId);
-        if(!$editora){
-            return response()->json(['message' => 'Não foram encontrados registros desta editora!'], 404);
+        try {
+            $editora = $this->editoraService->detalhes($editoraId);
+            return response()->json(['data' => $editora]);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
         }
-        return response()->json(['data' => $editora]);
+
     }
 
     public function update(EditoraRequest $editoraRequest, int $editoraId): JsonResponse
     {
-        $resposta = $this->editoraService->editar($editoraId, $editoraRequest);
-
-        if(!$resposta){
-            return response()->json(['message' => 'Não foi possível atualizar a editora!'], 400);
+        try {
+            $this->editoraService->editar($editoraId, $editoraRequest);
+            return response()->json(['message' => 'Editora atualizada com sucesso!']);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 400);
         }
-        return response()->json(['message' => 'Editora atualizada com sucesso!']);
     }
 
     public function destroy(int $editoraId): JsonResponse
     {
-        $resposta = $this->editoraService->deletar($editoraId);
-        if(!$resposta){
-            return response()->json(['message' => 'Não foi possível deletar a editora!'], 400);
+        try{
+            $this->editoraService->deletar($editoraId);
+            return response()->json(['message' => 'Editora deletada com sucesso!']);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 400);
         }
-        return response()->json(['message' => 'Editora deletada com sucesso!']);
     }
 }

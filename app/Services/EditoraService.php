@@ -25,7 +25,7 @@ class EditoraService
     public function todosRegistros(): object
     {
         $editoras = $this->editoraRepository->all();
-        if(!$editoras){
+        if($editoras->isEmpty()){
             throw new JsonException('Não foram encontrados registros de editoras!');
         }
         return $editoras;
@@ -33,17 +33,27 @@ class EditoraService
 
     public function detalhes(int $editoraId): object|null
     {
-        return $this->editoraRepository->withBooks($editoraId);
+        $editora = $this->editoraRepository->withBooks($editoraId);
+        if(!$editora){
+            throw new JsonException('Não foi possível buscar a editora!');
+        }
+        return $editora;
     }
 
     public function editar(int $editoraId, EditoraRequest $editoraRequest): bool
     {
         $validate = $editoraRequest->validated();
-        return $this->editoraRepository->update($editoraId, $validate);
+        if(!$this->editoraRepository->update($editoraId, $validate)){
+            throw new JsonException('Não foi possível atualizar a editora!');
+        }
+        return true;
     }
 
     public function deletar(int $editoraId): bool
     {
-        return $this->editoraRepository->delete($editoraId);
+        if(!$this->editoraRepository->delete($editoraId)){
+            throw new JsonException('Não foi possível deletar a editora!');
+        }
+        return true;
     }
 }
