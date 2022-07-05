@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AutorController;
 use App\Http\Controllers\EditoraController;
 use App\Http\Controllers\EmprestimoController;
@@ -15,31 +16,40 @@ Route::controller(EditoraController::class)->prefix('editora')->name('editora.')
     Route::get('/',  'index')->name('index');
     Route::get('/{id}', 'show')->name('show');
     Route::get('/{id}/livros', 'showWithBooks')->name('showbooks');
-    Route::put('/{id}', 'update')->name('update');
-    Route::post('/', 'store')->name('store');
-    Route::delete('/{id}', 'destroy')->name('destroy');
+
+    Route::middleware(['auth:sanctum'])->group(function (){
+        Route::put('/{id}', 'update')->name('update')->middleware(['auth:sanctum']);
+        Route::post('/', 'store')->name('store')->middleware(['auth:sanctum']);
+        Route::delete('/{id}', 'destroy')->name('destroy')->middleware(['auth:sanctum']);
+    });
 });
 
 Route::controller(AutorController::class)->prefix('autor')->name('autor.')->group(function (){
     Route::get('/',  'index')->name('index');
     Route::get('/{id}', 'show')->name('show');
-    Route::put('/{id}', 'update')->name('update');
-    Route::post('/', 'store')->name('store');
-    Route::delete('/{id}', 'destroy')->name('destroy');
+
+    Route::middleware(['auth:sanctum'])->group(function (){
+        Route::put('/{id}', 'update')->name('update')->middleware(['auth:sanctum']);
+        Route::post('/', 'store')->name('store')->middleware(['auth:sanctum']);
+        Route::delete('/{id}', 'destroy')->name('destroy')->middleware(['auth:sanctum']);
+    });
 });
 
 Route::controller(LivroController::class)->prefix('livro')->name('livro.')->group(function (){
     Route::get('/',  'index')->name('index');
     Route::get('/{id}', 'show')->name('show');
-    Route::get('/{id}/emprestimos', 'showWithEmprestimos')->name('showemprestimos');
     Route::get('/{id}/autor', 'showWithAutor')->name('showautor');
     Route::get('/{id}/editora', 'showWithEditora')->name('showeditora');
-    Route::put('/{id}', 'update')->name('update');
-    Route::post('/', 'store')->name('store');
-    Route::delete('/{id}', 'destroy')->name('destroy');
+
+    Route::middleware(['auth:sanctum'])->group(function (){
+        Route::get('/{id}/emprestimos', 'showWithEmprestimos')->name('showemprestimos');
+        Route::put('/{id}', 'update')->name('update');
+        Route::post('/', 'store')->name('store');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
 });
 
-Route::controller(EmprestimoController::class)->prefix('emprestimo')->name('emprestimo.')->group(function (){
+Route::controller(EmprestimoController::class)->middleware(['auth:sanctum'])->prefix('emprestimo')->name('emprestimo.')->group(function (){
     Route::get('/',  'index')->name('index');
     Route::get('/{id}', 'show')->name('show');
     Route::get('/{id}/usuario', 'showWithUser')->name('showuser');
@@ -48,4 +58,10 @@ Route::controller(EmprestimoController::class)->prefix('emprestimo')->name('empr
     Route::put('/{id}', 'update')->name('update');
     Route::post('/', 'store')->name('store');
     Route::delete('/{id}', 'destroy')->name('destroy');
+});
+
+Route::controller(AuthController::class)->prefix('auth')->name('auth.')->group(function (){
+    Route::post('/register', 'register')->name('register');
+    Route::post('/login', 'login')->name('login');
+    Route::post('/logout', 'logout')->name('logout')->middleware(['auth:sanctum']);
 });
