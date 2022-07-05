@@ -14,6 +14,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(EditoraController::class)->prefix('editora')->name('editora.')->group(function (){
     Route::get('/',  'index')->name('index');
     Route::get('/{id}', 'show')->name('show');
+    Route::get('/{id}/livros', 'showWithBooks')->name('showbooks');
     Route::put('/{id}', 'update')->name('update');
     Route::post('/', 'store')->name('store');
     Route::delete('/{id}', 'destroy')->name('destroy');
@@ -29,7 +30,6 @@ Route::controller(AutorController::class)->prefix('autor')->name('autor.')->grou
 
 Route::controller(LivroController::class)->prefix('livro')->name('livro.')->group(function (){
     Route::get('/',  'index')->name('index');
-    Route::get('/cadastrar','cadastrar')->name('cadastrar');
     Route::get('/{id}', 'show')->name('show');
     Route::put('/{id}', 'update')->name('update');
     Route::post('/', 'store')->name('store');
@@ -38,7 +38,6 @@ Route::controller(LivroController::class)->prefix('livro')->name('livro.')->grou
 
 Route::controller(EmprestimoController::class)->prefix('emprestimo')->name('emprestimo.')->group(function (){
     Route::get('/',  'index')->name('index');
-    Route::get('/cadastrar','cadastrar')->name('cadastrar');
     Route::get('/{id}', 'show')->name('show');
     Route::put('/{id}', 'update')->name('update');
     Route::post('/', 'store')->name('store');
