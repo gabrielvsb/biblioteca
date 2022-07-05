@@ -33,6 +33,15 @@ class EditoraService
 
     public function detalhes(int $editoraId): object|null
     {
+        $editora = $this->editoraRepository->find($editoraId);
+        if(!$editora){
+            throw new JsonException('Não foi possível buscar a editora!');
+        }
+        return $editora;
+    }
+
+    public function detalhesComLivros(int $editoraId): object|null
+    {
         $editora = $this->editoraRepository->withBooks($editoraId);
         if(!$editora){
             throw new JsonException('Não foi possível buscar a editora!');
