@@ -41,7 +41,36 @@ class LivroController extends Controller
         }catch (JsonException $jsonException){
             return response()->json(['message' => $jsonException->getMessage()], 404);
         }
+    }
 
+    public function showWithEmprestimos(int $livroId): JsonResponse
+    {
+        try {
+            $livro = $this->livroService->detalhesComEmprestimos($livroId);
+            return response()->json(['data' => $livro]);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
+    }
+
+    public function showWithAutor(int $livroId): JsonResponse
+    {
+        try {
+            $livro = $this->livroService->detalhesComAutor($livroId);
+            return response()->json(['data' => $livro]);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
+    }
+
+    public function showWithEditora(int $livroId): JsonResponse
+    {
+        try {
+            $livro = $this->livroService->detalhesComEditora($livroId);
+            return response()->json(['data' => $livro]);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
     }
 
     public function update(LivroRequest $livroRequest, int $livroId): JsonResponse

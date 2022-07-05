@@ -20,7 +20,7 @@ class Emprestimo extends Model
 
     public function usuario(): belongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public function livro(): belongsTo

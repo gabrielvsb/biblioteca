@@ -31,6 +31,9 @@ Route::controller(AutorController::class)->prefix('autor')->name('autor.')->grou
 Route::controller(LivroController::class)->prefix('livro')->name('livro.')->group(function (){
     Route::get('/',  'index')->name('index');
     Route::get('/{id}', 'show')->name('show');
+    Route::get('/{id}/emprestimos', 'showWithEmprestimos')->name('showemprestimos');
+    Route::get('/{id}/autor', 'showWithAutor')->name('showautor');
+    Route::get('/{id}/editora', 'showWithEditora')->name('showeditora');
     Route::put('/{id}', 'update')->name('update');
     Route::post('/', 'store')->name('store');
     Route::delete('/{id}', 'destroy')->name('destroy');

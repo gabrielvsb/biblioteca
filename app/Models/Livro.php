@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -21,14 +22,14 @@ class Livro extends Model
         'id_autor'
     ];
 
-    public function editora(): HasOne
+    public function editora(): belongsTo
     {
-        return $this->hasOne(Editora::class);
+        return $this->belongsTo(Editora::class);
     }
 
-    public function autor(): HasOne
+    public function autor(): belongsTo
     {
-        return $this->hasOne(Autor::class);
+        return $this->belongsTo(Autor::class);
     }
 
     public function emprestimos(): hasMany

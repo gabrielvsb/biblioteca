@@ -40,6 +40,33 @@ class LivroService
         return $livro;
     }
 
+    public function detalhesComEmprestimos(int $livroId): object|null
+    {
+        $livro = $this->livroRepository->withEmprestimos($livroId);
+        if(!$livro){
+            throw new JsonException('Não foi possível buscar o livro com detalhes de emprestimos!');
+        }
+        return $livro;
+    }
+
+    public function detalhesComAutor(int $livroId): object|null
+    {
+        $livro = $this->livroRepository->withAutor($livroId);
+        if(!$livro){
+            throw new JsonException('Não foi possível buscar o livro com detalhes do autor!');
+        }
+        return $livro;
+    }
+
+    public function detalhesComEditora(int $livroId): object|null
+    {
+        $livro = $this->livroRepository->withEditora($livroId);
+        if(!$livro){
+            throw new JsonException('Não foi possível buscar o livro com detalhes da editora!');
+        }
+        return $livro;
+    }
+
     public function editar(int $livroId, LivroRequest $livroRequest): bool
     {
         $validate = $livroRequest->validated();

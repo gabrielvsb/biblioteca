@@ -114,4 +114,52 @@ class LivroTest extends TestCase
             ->assertStatus(404)
             ->assertJsonStructure(['message']);
     }
+
+    public function test_get_livro_with_emprestimos(): void
+    {
+        $emprestimo = Emprestimo::factory()->create();
+
+        $this->json('GET', 'api/livro/'.$emprestimo->id_livro.'/emprestimos', ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJsonStructure(["data" => ["emprestimos"]]);
+    }
+
+    public function test_get_livro_with_emprestimos_fail(): void
+    {
+        $this->json('GET', 'api/livro/1000/emprestimos', ['Accept' => 'application/json'])
+            ->assertStatus(404)
+            ->assertJsonStructure(["message"]);
+    }
+
+    public function test_get_livro_with_autor(): void
+    {
+        $livro = Livro::factory()->create();
+
+        $this->json('GET', 'api/livro/'.$livro->id.'/autor', ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJsonStructure(["data" => ["autor"]]);
+    }
+
+    public function test_get_livro_with_autor_fail(): void
+    {
+        $this->json('GET', 'api/livro/1000/autor', ['Accept' => 'application/json'])
+            ->assertStatus(404)
+            ->assertJsonStructure(["message"]);
+    }
+
+    public function test_get_livro_with_editora(): void
+    {
+        $livro = Livro::factory()->create();
+
+        $this->json('GET', 'api/livro/'.$livro->id.'/editora', ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJsonStructure(["data" => ["editora"]]);
+    }
+
+    public function test_get_livro_with_editora_fail(): void
+    {
+        $this->json('GET', 'api/livro/1000/editora', ['Accept' => 'application/json'])
+            ->assertStatus(404)
+            ->assertJsonStructure(["message"]);
+    }
 }
