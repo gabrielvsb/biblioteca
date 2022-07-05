@@ -15,11 +15,19 @@ class EmprestimoTest extends TestCase
 {
     use DatabaseTransactions;
 
+    protected $user;
+
+    public function setUp(): void {
+        parent::setUp();
+        $this->user = User::factory()->create();
+    }
+
     public function test_get_all_emprestimos(): void
     {
         Emprestimo::factory()->count(3)->create();
 
-        $this->json('GET', 'api/emprestimo', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo', ['Accept' => 'application/json'])
             ->assertStatus(200);
     }
 
@@ -27,7 +35,8 @@ class EmprestimoTest extends TestCase
     {
         Emprestimo::query()->delete();
 
-        $this->json('GET', 'api/emprestimo', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(['message']);
     }
@@ -42,14 +51,16 @@ class EmprestimoTest extends TestCase
             'id_livro' => $livro->id,
         ];
 
-        $this->json('POST', 'api/emprestimo', $emprestimoAtributos, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('POST', 'api/emprestimo', $emprestimoAtributos, ['Accept' => 'application/json'])
             ->assertStatus(201)
             ->assertJsonStructure(['message']);
     }
 
     public function test_insert_emprestimo_validate_fields(): void
     {
-        $this->json('POST', 'api/emprestimo', [], ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('POST', 'api/emprestimo', [], ['Accept' => 'application/json'])
             ->assertStatus(422)
             ->assertJsonStructure(['message', 'errors']);
     }
@@ -58,14 +69,16 @@ class EmprestimoTest extends TestCase
     {
         $emprestimo = Emprestimo::factory()->create();
 
-        $this->json('GET', 'api/emprestimo/'.$emprestimo->id, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo/'.$emprestimo->id, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(['data']);
     }
 
     public function test_get_emprestimo_by_id_fail(): void
     {
-        $this->json('GET', 'api/emprestimo/1000', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo/1000', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(['message']);
     }
@@ -78,7 +91,8 @@ class EmprestimoTest extends TestCase
             'ativo' => false
         ];
 
-        $this->json('PUT', 'api/emprestimo/'.$emprestimo->id, $novoAtributo, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('PUT', 'api/emprestimo/'.$emprestimo->id, $novoAtributo, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(['message']);
     }
@@ -89,7 +103,8 @@ class EmprestimoTest extends TestCase
             'ativo' => false
         ];
 
-        $this->json('PUT', 'api/emprestimo/1000', $novoAtributo, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('PUT', 'api/emprestimo/1000', $novoAtributo, ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(['message']);
     }
@@ -98,14 +113,16 @@ class EmprestimoTest extends TestCase
     {
         $emprestimo = Emprestimo::factory()->create();
 
-        $this->json('DELETE', 'api/emprestimo/'.$emprestimo->id, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('DELETE', 'api/emprestimo/'.$emprestimo->id, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(['message']);
     }
 
     public function test_delete_emprestimo_fail()
     {
-        $this->json('DELETE', 'api/emprestimo/1000', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('DELETE', 'api/emprestimo/1000', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(['message']);
     }
@@ -114,7 +131,8 @@ class EmprestimoTest extends TestCase
     {
         $emprestimo = Emprestimo::factory()->create();
 
-        $this->json('GET', 'api/emprestimo/'.$emprestimo->id.'/livro', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo/'.$emprestimo->id.'/livro', ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(["data" => ["livro"]]);
     }
@@ -123,7 +141,8 @@ class EmprestimoTest extends TestCase
     {
         $emprestimo = Emprestimo::factory()->create();
 
-        $this->json('GET', 'api/emprestimo/'.$emprestimo->id.'/usuario', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo/'.$emprestimo->id.'/usuario', ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(["data" => ["usuario"]]);
     }
@@ -132,28 +151,32 @@ class EmprestimoTest extends TestCase
     {
         $emprestimo = Emprestimo::factory()->create();
 
-        $this->json('GET', 'api/emprestimo/'.$emprestimo->id.'/completo', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo/'.$emprestimo->id.'/completo', ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(["data" => ["usuario", "livro"]]);
     }
 
     public function test_get_emprestimo_with_book_fail(): void
     {
-        $this->json('GET', 'api/emprestimo/1000/livro', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo/1000/livro', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(["message"]);
     }
 
     public function test_get_emprestimo_with_user_fail(): void
     {
-        $this->json('GET', 'api/emprestimo/1000/usuario', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo/1000/usuario', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(["message"]);
     }
 
     public function test_get_emprestimo_with_complete_detail_fail(): void
     {
-        $this->json('GET', 'api/emprestimo/1000/completo', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/emprestimo/1000/completo', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(["message"]);
     }

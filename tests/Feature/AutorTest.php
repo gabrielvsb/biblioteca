@@ -2,13 +2,24 @@
 
 namespace Tests\Feature;
 
-use App\Models\Autor;
+use App\Models\{
+    Autor,
+    User
+};
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class AutorTest extends TestCase
 {
     use DatabaseTransactions;
+
+    protected $user;
+
+    public function setUp(): void {
+        parent::setUp();
+        $this->user = User::factory()->create();
+    }
 
     public function test_get_all_autores(): void
     {
@@ -50,14 +61,16 @@ class AutorTest extends TestCase
             'nome' => 'Jorge'
         ];
 
-        $this->json('POST', 'api/autor', $autorAtributos, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('POST', 'api/autor', $autorAtributos, ['Accept' => 'application/json'])
             ->assertStatus(201)
             ->assertJsonStructure(["message"]);
     }
 
     public function test_insert_autor_fail_validate_fields(): void
     {
-        $this->json('POST', 'api/autor', [], ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('POST', 'api/autor', [], ['Accept' => 'application/json'])
             ->assertStatus(422)
             ->assertJsonStructure(["message", "errors"]);
     }
@@ -70,7 +83,8 @@ class AutorTest extends TestCase
             'nome' => 'Pedro'
         ];
 
-        $this->json('PUT', 'api/autor/'.$autor->id, $novosDados, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('PUT', 'api/autor/'.$autor->id, $novosDados, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(["message"]);
     }
@@ -81,7 +95,8 @@ class AutorTest extends TestCase
             'nome' => 'Pedro'
         ];
 
-        $this->json('PUT', 'api/autor/1000', $novosDados, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('PUT', 'api/autor/1000', $novosDados, ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(["message"]);
     }
@@ -90,14 +105,16 @@ class AutorTest extends TestCase
     {
         $autor = Autor::factory()->create();
 
-        $this->json('DELETE', 'api/autor/'.$autor->id, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('DELETE', 'api/autor/'.$autor->id, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(["message"]);
     }
 
     public function test_delete_autor_fail(): void
     {
-        $this->json('DELETE', 'api/autor/1000', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('DELETE', 'api/autor/1000', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(["message"]);
     }

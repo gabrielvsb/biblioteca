@@ -6,12 +6,20 @@ use App\Models\Autor;
 use App\Models\Editora;
 use App\Models\Emprestimo;
 use App\Models\Livro;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class LivroTest extends TestCase
 {
     use DatabaseTransactions;
+
+    protected $user;
+
+    public function setUp(): void {
+        parent::setUp();
+        $this->user = User::factory()->create();
+    }
 
     public function test_get_all_livros(): void
     {
@@ -46,7 +54,8 @@ class LivroTest extends TestCase
             'id_autor'         => $autor->id
         ];
 
-        $this->json('POST', 'api/livro', $livroAtributos, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('POST', 'api/livro', $livroAtributos, ['Accept' => 'application/json'])
             ->assertStatus(201)
             ->assertJsonStructure(["message"]);
 
@@ -54,7 +63,8 @@ class LivroTest extends TestCase
 
     public function test_insert_livro_validate_fields_fail(): void
     {
-        $this->json('POST', 'api/livro', [], ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('POST', 'api/livro', [], ['Accept' => 'application/json'])
             ->assertStatus(422)
             ->assertJsonStructure(["message", "errors"]);
     }
@@ -83,7 +93,8 @@ class LivroTest extends TestCase
             'nome' => 'Livro teste atualização'
         ];
 
-        $this->json('PUT', 'api/livro/'.$livro->id, $novosDados, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('PUT', 'api/livro/'.$livro->id, $novosDados, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(['message']);
     }
@@ -94,7 +105,8 @@ class LivroTest extends TestCase
             'nome' => 'Livro teste atualização'
         ];
 
-        $this->json('PUT', 'api/livro/1000', $novosDados, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('PUT', 'api/livro/1000', $novosDados, ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(['message']);
     }
@@ -103,14 +115,16 @@ class LivroTest extends TestCase
     {
         $livro = Livro::factory()->create();
 
-        $this->json('DELETE', 'api/livro/'.$livro->id, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('DELETE', 'api/livro/'.$livro->id, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(['message']);
     }
 
     public function test_delete_livro_fail(): void
     {
-        $this->json('DELETE', 'api/livro/1000', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('DELETE', 'api/livro/1000', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(['message']);
     }
@@ -119,14 +133,16 @@ class LivroTest extends TestCase
     {
         $emprestimo = Emprestimo::factory()->create();
 
-        $this->json('GET', 'api/livro/'.$emprestimo->id_livro.'/emprestimos', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/livro/'.$emprestimo->id_livro.'/emprestimos', ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(["data" => ["emprestimos"]]);
     }
 
     public function test_get_livro_with_emprestimos_fail(): void
     {
-        $this->json('GET', 'api/livro/1000/emprestimos', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('GET', 'api/livro/1000/emprestimos', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(["message"]);
     }

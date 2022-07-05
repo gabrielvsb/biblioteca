@@ -5,12 +5,20 @@ namespace Tests\Feature;
 use App\Models\Editora;
 use App\Models\Emprestimo;
 use App\Models\Livro;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class EditoraTest extends TestCase
 {
     use DatabaseTransactions;
+
+    protected $user;
+
+    public function setUp(): void {
+        parent::setUp();
+        $this->user = User::factory()->create();
+    }
 
     public function test_exists_editoras(): void
     {
@@ -23,7 +31,8 @@ class EditoraTest extends TestCase
 
     public function test_required_fields_editora(): void
     {
-        $this->json('POST', 'api/editora', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('POST', 'api/editora', ['Accept' => 'application/json'])
             ->assertStatus(422)
             ->assertJsonStructure([
                 "message",
@@ -37,7 +46,8 @@ class EditoraTest extends TestCase
             'nome' => 'Editora Teste'
         ];
 
-        $this->json('POST', 'api/editora', $data, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('POST', 'api/editora', $data, ['Accept' => 'application/json'])
             ->assertStatus(201)
             ->assertJsonStructure(["message"]);
     }
@@ -59,7 +69,8 @@ class EditoraTest extends TestCase
             'nome' => 'Editora Novo'
         ];
 
-        $this->putJson( 'api/editora/'.$editora->id, $novosDados, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->putJson( 'api/editora/'.$editora->id, $novosDados, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(["message"]);
     }
@@ -68,7 +79,8 @@ class EditoraTest extends TestCase
     {
         $editora = Editora::factory()->create();
 
-        $this->deleteJson( 'api/editora/'.$editora->id, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->deleteJson( 'api/editora/'.$editora->id, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure(["message"]);
     }
@@ -85,14 +97,16 @@ class EditoraTest extends TestCase
     {
         $data = [];
 
-        $this->json('POST', 'api/editora', $data, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->json('POST', 'api/editora', $data, ['Accept' => 'application/json'])
             ->assertStatus(422)
             ->assertJsonStructure(["message", "errors"]);
     }
 
     public function test_fail_delete_editora(): void
     {
-        $this->deleteJson( 'api/editora/1000', ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->deleteJson( 'api/editora/1000', ['Accept' => 'application/json'])
             ->assertStatus(400)
             ->assertJsonStructure(["message"]);
     }
@@ -103,7 +117,8 @@ class EditoraTest extends TestCase
             'nome' => 'Editora Nova'
         ];
 
-        $this->putJson( 'api/editora/1000', $novosDados, ['Accept' => 'application/json'])
+        $this->actingAs($this->user)
+            ->putJson( 'api/editora/1000', $novosDados, ['Accept' => 'application/json'])
             ->assertStatus(400)
             ->assertJsonStructure(["message"]);
     }

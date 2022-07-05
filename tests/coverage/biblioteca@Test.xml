@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657025290">
-  <project timestamp="1657025290">
+<coverage generated="1657033386">
+  <project timestamp="1657033386">
     <file name="/var/www/app/Console/Kernel.php">
       <class name="App\Console\Kernel" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
@@ -25,6 +25,31 @@
       <line num="16" type="method" name="render" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="18" type="stmt" count="0"/>
       <metrics loc="21" ncloc="20" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/var/www/app/Http/Controllers/AuthController.php">
+      <class name="App\Http\Controllers\AuthController" namespace="global">
+        <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="19" coveredelements="0"/>
+      </class>
+      <line num="13" type="method" name="register" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="21" type="stmt" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="27" type="stmt" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="32" type="method" name="login" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="42" type="stmt" count="0"/>
+      <line num="45" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="49" type="stmt" count="0"/>
+      <line num="52" type="method" name="logout" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="54" type="stmt" count="0"/>
+      <line num="56" type="stmt" count="0"/>
+      <metrics loc="59" ncloc="59" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
     <file name="/var/www/app/Http/Controllers/AutorController.php">
       <class name="App\Http\Controllers\AutorController" namespace="global">
@@ -635,6 +660,6 @@
       <line num="84" type="stmt" count="1"/>
       <metrics loc="87" ncloc="87" classes="1" methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="39" coveredelements="39"/>
     </file>
-    <metrics files="40" loc="1652" ncloc="1473" classes="30" methods="112" coveredmethods="106" conditionals="0" coveredconditionals="0" statements="282" coveredstatements="270" elements="394" coveredelements="376"/>
+    <metrics files="41" loc="1711" ncloc="1532" classes="31" methods="115" coveredmethods="106" conditionals="0" coveredconditionals="0" statements="298" coveredstatements="270" elements="413" coveredelements="376"/>
   </project>
 </coverage>
