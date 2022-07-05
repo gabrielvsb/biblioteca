@@ -31,27 +31,27 @@ class LivroService
         return $livros;
     }
 
-    public function detalhes(int $autorId): object|null
+    public function detalhes(int $livroId): object|null
     {
-        $autor = $this->livroRepository->find($autorId);
-        if(!$autor){
+        $livro = $this->livroRepository->find($livroId);
+        if(!$livro){
             throw new JsonException('Não foi possível buscar o livro!');
         }
-        return $autor;
+        return $livro;
     }
 
-    public function editar(int $autorId, LivroRequest $livroRequest): bool
+    public function editar(int $livroId, LivroRequest $livroRequest): bool
     {
         $validate = $livroRequest->validated();
-        if(!$this->livroRepository->update($autorId, $validate)){
+        if(!$this->livroRepository->update($livroId, $validate)){
             throw new JsonException('Não foi possível atualizar o livro!');
         }
         return true;
     }
 
-    public function deletar(int $autorId): bool
+    public function deletar(int $livroId): bool
     {
-        if(!$this->livroRepository->delete($autorId)){
+        if(!$this->livroRepository->delete($livroId)){
             throw new JsonException('Não foi possível deletar o livro!');
         }
         return true;
