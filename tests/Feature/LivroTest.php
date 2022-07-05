@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Autor;
 use App\Models\Editora;
+use App\Models\Emprestimo;
 use App\Models\Livro;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -22,6 +23,7 @@ class LivroTest extends TestCase
 
     public function test_get_all_livros_fail(): void
     {
+        Emprestimo::query()->delete();
         Livro::query()->delete();
 
         $this->json('GET', 'api/livro', ['Accept' => 'application/json'])

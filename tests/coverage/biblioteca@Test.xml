@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1656689405">
-  <project timestamp="1656689405">
+<coverage generated="1656950205">
+  <project timestamp="1656950205">
     <file name="/var/www/app/Console/Kernel.php">
       <class name="App\Console\Kernel" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </class>
-      <line num="26" type="method" name="commands" visibility="protected" complexity="1" crap="1" count="31"/>
-      <line num="28" type="stmt" count="31"/>
-      <line num="30" type="stmt" count="31"/>
+      <line num="26" type="method" name="commands" visibility="protected" complexity="1" crap="1" count="43"/>
+      <line num="28" type="stmt" count="43"/>
+      <line num="30" type="stmt" count="43"/>
       <metrics loc="33" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
     </file>
     <file name="/var/www/app/Exceptions/Handler.php">
       <class name="App\Exceptions\Handler" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
-      <line num="35" type="method" name="register" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="37" type="stmt" count="4"/>
+      <line num="35" type="method" name="register" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="37" type="stmt" count="5"/>
       <metrics loc="42" ncloc="26" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="/var/www/app/Exceptions/JsonException.php">
@@ -65,10 +65,46 @@
     </file>
     <file name="/var/www/app/Http/Controllers/EditoraController.php">
       <class name="App\Http\Controllers\EditoraController" namespace="global">
+        <metrics complexity="12" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="30" coveredelements="30"/>
+      </class>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="13"/>
+      <line num="16" type="stmt" count="13"/>
+      <line num="19" type="method" name="index" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="22" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="24" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="29" type="method" name="store" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="31" type="stmt" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="35" type="method" name="show" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="38" type="stmt" count="2"/>
+      <line num="39" type="stmt" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="46" type="method" name="showWithBooks" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="49" type="stmt" count="2"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="57" type="method" name="update" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="60" type="stmt" count="2"/>
+      <line num="61" type="stmt" count="1"/>
+      <line num="62" type="stmt" count="1"/>
+      <line num="63" type="stmt" count="1"/>
+      <line num="67" type="method" name="destroy" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="70" type="stmt" count="2"/>
+      <line num="71" type="stmt" count="1"/>
+      <line num="72" type="stmt" count="1"/>
+      <line num="73" type="stmt" count="1"/>
+      <metrics loc="77" ncloc="77" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="30" coveredelements="30"/>
+    </file>
+    <file name="/var/www/app/Http/Controllers/EmprestimoController.php">
+      <class name="App\Http\Controllers\EmprestimoController" namespace="global">
         <metrics complexity="10" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="25" coveredelements="25"/>
       </class>
-      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
-      <line num="16" type="stmt" count="11"/>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="16" type="stmt" count="10"/>
       <line num="19" type="method" name="index" visibility="public" complexity="2" crap="2" count="2"/>
       <line num="22" type="stmt" count="2"/>
       <line num="23" type="stmt" count="1"/>
@@ -93,29 +129,6 @@
       <line num="61" type="stmt" count="1"/>
       <line num="62" type="stmt" count="1"/>
       <metrics loc="66" ncloc="66" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="25" coveredelements="25"/>
-    </file>
-    <file name="/var/www/app/Http/Controllers/EmprestimoController.php">
-      <class name="App\Http\Controllers\EmprestimoController" namespace="global">
-        <metrics complexity="6" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="17" coveredelements="0"/>
-      </class>
-      <line num="16" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <line num="22" type="method" name="index" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="24" type="stmt" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <line num="28" type="method" name="store" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="30" type="stmt" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <line num="34" type="method" name="show" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="40" type="method" name="update" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="42" type="stmt" count="0"/>
-      <line num="43" type="stmt" count="0"/>
-      <line num="46" type="method" name="destroy" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="48" type="stmt" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <metrics loc="52" ncloc="48" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="17" coveredelements="0"/>
     </file>
     <file name="/var/www/app/Http/Controllers/LivroController.php">
       <class name="App\Http\Controllers\LivroController" namespace="global">
@@ -241,6 +254,20 @@
       <line num="30" type="stmt" count="2"/>
       <metrics loc="35" ncloc="35" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
     </file>
+    <file name="/var/www/app/Http/Requests/EmprestimoRequest.php">
+      <class name="App\Http\Requests\EmprestimoRequest" namespace="global">
+        <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
+      </class>
+      <line num="9" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="11" type="stmt" count="4"/>
+      <line num="14" type="method" name="rules" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="16" type="stmt" count="4"/>
+      <line num="19" type="method" name="store" visibility="protected" complexity="1" crap="1" count="2"/>
+      <line num="22" type="stmt" count="2"/>
+      <line num="27" type="method" name="update" visibility="protected" complexity="1" crap="1" count="2"/>
+      <line num="30" type="stmt" count="2"/>
+      <metrics loc="35" ncloc="35" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
+    </file>
     <file name="/var/www/app/Http/Requests/LivroRequest.php">
       <class name="App\Http\Requests\LivroRequest" namespace="global">
         <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
@@ -307,8 +334,8 @@
       <class name="App\Providers\AuthServiceProvider" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
-      <line num="24" type="method" name="boot" visibility="public" complexity="1" crap="1" count="31"/>
-      <line num="26" type="stmt" count="31"/>
+      <line num="24" type="method" name="boot" visibility="public" complexity="1" crap="1" count="43"/>
+      <line num="26" type="stmt" count="43"/>
       <metrics loc="31" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="/var/www/app/Providers/BroadcastServiceProvider.php">
@@ -330,19 +357,19 @@
       <class name="App\Providers\RouteServiceProvider" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
       </class>
-      <line num="36" type="method" name="boot" visibility="public" complexity="1" crap="1" count="31"/>
-      <line num="38" type="stmt" count="31"/>
-      <line num="40" type="stmt" count="31"/>
-      <line num="41" type="stmt" count="31"/>
-      <line num="42" type="stmt" count="31"/>
-      <line num="43" type="stmt" count="31"/>
-      <line num="44" type="stmt" count="31"/>
-      <line num="46" type="stmt" count="31"/>
-      <line num="47" type="stmt" count="31"/>
-      <line num="48" type="stmt" count="31"/>
-      <line num="57" type="method" name="configureRateLimiting" visibility="protected" complexity="2" crap="2" count="31"/>
-      <line num="59" type="stmt" count="31"/>
-      <line num="60" type="stmt" count="31"/>
+      <line num="36" type="method" name="boot" visibility="public" complexity="1" crap="1" count="43"/>
+      <line num="38" type="stmt" count="43"/>
+      <line num="40" type="stmt" count="43"/>
+      <line num="41" type="stmt" count="43"/>
+      <line num="42" type="stmt" count="43"/>
+      <line num="43" type="stmt" count="43"/>
+      <line num="44" type="stmt" count="43"/>
+      <line num="46" type="stmt" count="43"/>
+      <line num="47" type="stmt" count="43"/>
+      <line num="48" type="stmt" count="43"/>
+      <line num="57" type="method" name="configureRateLimiting" visibility="protected" complexity="2" crap="2" count="43"/>
+      <line num="59" type="stmt" count="43"/>
+      <line num="60" type="stmt" count="43"/>
       <metrics loc="64" ncloc="39" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
     </file>
     <file name="/var/www/app/Repositories/AutorRepository.php">
@@ -358,44 +385,44 @@
       <class name="App\Repositories\BaseRepository" namespace="global">
         <metrics complexity="8" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="18" coveredelements="18"/>
       </class>
-      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="31"/>
-      <line num="13" type="stmt" count="31"/>
-      <line num="16" type="method" name="all" visibility="public" complexity="1" crap="1" count="6"/>
-      <line num="18" type="stmt" count="6"/>
-      <line num="21" type="method" name="find" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="23" type="stmt" count="4"/>
-      <line num="26" type="method" name="save" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="28" type="stmt" count="3"/>
-      <line num="31" type="method" name="update" visibility="public" complexity="2" crap="2" count="6"/>
-      <line num="33" type="stmt" count="6"/>
-      <line num="34" type="stmt" count="6"/>
-      <line num="35" type="stmt" count="3"/>
-      <line num="37" type="stmt" count="3"/>
-      <line num="40" type="method" name="delete" visibility="public" complexity="2" crap="2" count="6"/>
-      <line num="42" type="stmt" count="6"/>
-      <line num="43" type="stmt" count="6"/>
-      <line num="44" type="stmt" count="3"/>
-      <line num="46" type="stmt" count="3"/>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="43"/>
+      <line num="13" type="stmt" count="43"/>
+      <line num="16" type="method" name="all" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="18" type="stmt" count="8"/>
+      <line num="21" type="method" name="find" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="23" type="stmt" count="8"/>
+      <line num="26" type="method" name="save" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="28" type="stmt" count="4"/>
+      <line num="31" type="method" name="update" visibility="public" complexity="2" crap="2" count="8"/>
+      <line num="33" type="stmt" count="8"/>
+      <line num="34" type="stmt" count="8"/>
+      <line num="35" type="stmt" count="4"/>
+      <line num="37" type="stmt" count="4"/>
+      <line num="40" type="method" name="delete" visibility="public" complexity="2" crap="2" count="8"/>
+      <line num="42" type="stmt" count="8"/>
+      <line num="43" type="stmt" count="8"/>
+      <line num="44" type="stmt" count="4"/>
+      <line num="46" type="stmt" count="4"/>
       <metrics loc="49" ncloc="49" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="18" coveredelements="18"/>
     </file>
     <file name="/var/www/app/Repositories/EditoraRepository.php">
       <class name="App\Repositories\EditoraRepository" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
       </class>
-      <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
-      <line num="14" type="stmt" count="11"/>
-      <line num="15" type="stmt" count="11"/>
+      <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="13"/>
+      <line num="14" type="stmt" count="13"/>
+      <line num="15" type="stmt" count="13"/>
       <line num="18" type="method" name="withBooks" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="20" type="stmt" count="2"/>
       <metrics loc="23" ncloc="23" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
     </file>
     <file name="/var/www/app/Repositories/EmprestimoRepository.php">
       <class name="App\Repositories\EmprestimoRepository" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
-      <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <metrics loc="24" ncloc="20" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="19" type="stmt" count="10"/>
+      <metrics loc="24" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="/var/www/app/Repositories/LivroRepository.php">
       <class name="App\Repositories\LivroRepository" namespace="global">
@@ -437,10 +464,10 @@
     </file>
     <file name="/var/www/app/Services/EditoraService.php">
       <class name="App\Services\EditoraService" namespace="global">
-        <metrics complexity="10" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="24" coveredelements="24"/>
+        <metrics complexity="12" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="29" coveredelements="29"/>
       </class>
-      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
-      <line num="16" type="stmt" count="11"/>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="13"/>
+      <line num="16" type="stmt" count="13"/>
       <line num="19" type="method" name="cadastrar" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="21" type="stmt" count="1"/>
       <line num="22" type="stmt" count="1"/>
@@ -454,36 +481,53 @@
       <line num="37" type="stmt" count="2"/>
       <line num="38" type="stmt" count="1"/>
       <line num="40" type="stmt" count="1"/>
-      <line num="43" type="method" name="editar" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="43" type="method" name="detalhesComLivros" visibility="public" complexity="2" crap="2" count="2"/>
       <line num="45" type="stmt" count="2"/>
       <line num="46" type="stmt" count="2"/>
       <line num="47" type="stmt" count="1"/>
       <line num="49" type="stmt" count="1"/>
-      <line num="52" type="method" name="deletar" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="52" type="method" name="editar" visibility="public" complexity="2" crap="2" count="2"/>
       <line num="54" type="stmt" count="2"/>
-      <line num="55" type="stmt" count="1"/>
-      <line num="57" type="stmt" count="1"/>
-      <metrics loc="60" ncloc="60" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="24" coveredelements="24"/>
+      <line num="55" type="stmt" count="2"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="61" type="method" name="deletar" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="63" type="stmt" count="2"/>
+      <line num="64" type="stmt" count="1"/>
+      <line num="66" type="stmt" count="1"/>
+      <metrics loc="69" ncloc="69" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="29" coveredelements="29"/>
     </file>
     <file name="/var/www/app/Services/EmprestimoService.php">
       <class name="App\Services\EmprestimoService" namespace="global">
-        <metrics complexity="6" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="14" coveredelements="0"/>
+        <metrics complexity="10" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="26" coveredelements="26"/>
       </class>
-      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="20" type="stmt" count="0"/>
-      <line num="23" type="method" name="cadastrar" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <line num="26" type="stmt" count="0"/>
-      <line num="29" type="method" name="todosRegistros" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <line num="34" type="method" name="detalhes" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="39" type="method" name="editar" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="41" type="stmt" count="0"/>
-      <line num="42" type="stmt" count="0"/>
-      <line num="45" type="method" name="deletar" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="47" type="stmt" count="0"/>
-      <metrics loc="50" ncloc="46" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="14" coveredelements="0"/>
+      <line num="15" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="17" type="stmt" count="10"/>
+      <line num="20" type="method" name="cadastrar" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="24" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="28" type="method" name="todosRegistros" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="30" type="stmt" count="2"/>
+      <line num="31" type="stmt" count="2"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="37" type="method" name="detalhes" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="39" type="stmt" count="2"/>
+      <line num="40" type="stmt" count="2"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="46" type="method" name="editar" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="48" type="stmt" count="2"/>
+      <line num="49" type="stmt" count="2"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="55" type="method" name="deletar" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="57" type="stmt" count="2"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="60" type="stmt" count="1"/>
+      <metrics loc="63" ncloc="63" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="26" coveredelements="26"/>
     </file>
     <file name="/var/www/app/Services/LivroService.php">
       <class name="App\Services\LivroService" namespace="global">
@@ -515,6 +559,6 @@
       <line num="57" type="stmt" count="1"/>
       <metrics loc="60" ncloc="60" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="24" coveredelements="24"/>
     </file>
-    <metrics files="39" loc="1417" ncloc="1226" classes="29" methods="87" coveredmethods="64" conditionals="0" coveredconditionals="0" statements="193" coveredstatements="157" elements="280" coveredelements="221"/>
+    <metrics files="40" loc="1499" ncloc="1316" classes="30" methods="93" coveredmethods="83" conditionals="0" coveredconditionals="0" statements="225" coveredstatements="209" elements="318" coveredelements="292"/>
   </project>
 </coverage>

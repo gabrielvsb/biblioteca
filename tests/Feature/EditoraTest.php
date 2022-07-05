@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Editora;
+use App\Models\Emprestimo;
+use App\Models\Livro;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -108,8 +110,27 @@ class EditoraTest extends TestCase
 
     public function test_dont_exists_records_from_editora(): void
     {
+        Emprestimo::query()->delete();
+        Livro::query()->delete();
         Editora::query()->delete();
+
         $this->json('GET', 'api/editora', ['Accept' => 'application/json'])
             ->assertStatus(404);
+    }
+
+    public function test_get_editora_by_id_with_books(): void
+    {
+        $livro = Livro::factory()->create();
+
+        $this->json('GET', 'api/editora/'.$livro->id_editora.'/livros', ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJsonStructure(["data" => ["livros"]]);
+    }
+
+    public function test_get_editora_by_id_with_books_fails(): void
+    {
+        $this->json('GET', 'api/editora/1000/livros', ['Accept' => 'application/json'])
+            ->assertStatus(404)
+            ->assertJsonStructure(["message"]);
     }
 }
