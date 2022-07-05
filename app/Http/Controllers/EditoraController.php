@@ -43,6 +43,17 @@ class EditoraController extends Controller
 
     }
 
+    public function showWithBooks(int $editoraId): JsonResponse
+    {
+        try {
+            $editora = $this->editoraService->detalhesComLivros($editoraId);
+            return response()->json(['data' => $editora]);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
+
+    }
+
     public function update(EditoraRequest $editoraRequest, int $editoraId): JsonResponse
     {
         try {
