@@ -15,7 +15,7 @@ class LivroFactory extends Factory
     {
         return [
             'nome'             => $this->faker->title(),
-            'descricao'        => $this->faker->paragraph(),
+            'descricao'        => $this->faker->paragraph(1),
             'data_lancamento'  => $this->faker->date(),
             'id_editora'       => self::factoryForModel(Editora::class)->create()->id,
             'quantidade_total' => $this->faker->randomNumber(),
