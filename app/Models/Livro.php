@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Livro extends Model
@@ -28,5 +29,10 @@ class Livro extends Model
     public function autor(): HasOne
     {
         return $this->hasOne(Autor::class);
+    }
+
+    public function emprestimos(): hasMany
+    {
+        return $this->hasMany(Emprestimo::class, 'id_livro');
     }
 }

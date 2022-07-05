@@ -43,6 +43,33 @@ class EmprestimoService
         return $emprestimo;
     }
 
+    public function detalhesComUsuario(int $emprestimoId): object|null
+    {
+        $emprestimo = $this->emprestimoRepository->withUser($emprestimoId);
+        if(!$emprestimo){
+            throw new JsonException('Não foi possível buscar o emprestimo com detalhes de usuário!');
+        }
+        return $emprestimo;
+    }
+
+    public function detalhesComLivro(int $emprestimoId): object|null
+    {
+        $emprestimo = $this->emprestimoRepository->withBook($emprestimoId);
+        if(!$emprestimo){
+            throw new JsonException('Não foi possível buscar o emprestimo com detalhes de livro!');
+        }
+        return $emprestimo;
+    }
+
+    public function detalhesCompleto(int $emprestimoId): object|null
+    {
+        $emprestimo = $this->emprestimoRepository->complete($emprestimoId);
+        if(!$emprestimo){
+            throw new JsonException('Não foi possível buscar o emprestimo com detalhes completo!');
+        }
+        return $emprestimo;
+    }
+
     public function editar(int $emprestimoId, EmprestimoRequest $emprestimoRequest): bool
     {
         $validate = $emprestimoRequest->validated();

@@ -39,6 +39,9 @@ Route::controller(LivroController::class)->prefix('livro')->name('livro.')->grou
 Route::controller(EmprestimoController::class)->prefix('emprestimo')->name('emprestimo.')->group(function (){
     Route::get('/',  'index')->name('index');
     Route::get('/{id}', 'show')->name('show');
+    Route::get('/{id}/usuario', 'showWithUser')->name('showuser');
+    Route::get('/{id}/livro', 'showWithBook')->name('showbook');
+    Route::get('/{id}/completo', 'complete')->name('complete');
     Route::put('/{id}', 'update')->name('update');
     Route::post('/', 'store')->name('store');
     Route::delete('/{id}', 'destroy')->name('destroy');

@@ -43,6 +43,37 @@ class EmprestimoController extends Controller
 
     }
 
+    public function showWithUser(int $emprestimoId): JsonResponse
+    {
+        try {
+            $emprestimo = $this->emprestimoService->detalhesComUsuario($emprestimoId);
+            return response()->json(['data' => $emprestimo]);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
+
+    }
+
+    public function showWithBook(int $emprestimoId): JsonResponse
+    {
+        try {
+            $emprestimo = $this->emprestimoService->detalhesComLivro($emprestimoId);
+            return response()->json(['data' => $emprestimo]);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
+    }
+
+    public function complete(int $emprestimoId): JsonResponse
+    {
+        try {
+            $emprestimo = $this->emprestimoService->detalhesCompleto($emprestimoId);
+            return response()->json(['data' => $emprestimo]);
+        }catch (JsonException $jsonException){
+            return response()->json(['message' => $jsonException->getMessage()], 404);
+        }
+    }
+
     public function update(EmprestimoRequest $emprestimoRequest, int $emprestimoId): JsonResponse
     {
         try {

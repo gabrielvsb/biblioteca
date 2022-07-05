@@ -109,4 +109,52 @@ class EmprestimoTest extends TestCase
             ->assertStatus(404)
             ->assertJsonStructure(['message']);
     }
+
+    public function test_get_emprestimo_with_book(): void
+    {
+        $emprestimo = Emprestimo::factory()->create();
+
+        $this->json('GET', 'api/emprestimo/'.$emprestimo->id.'/livro', ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJsonStructure(["data" => ["livro"]]);
+    }
+
+    public function test_get_emprestimo_with_user(): void
+    {
+        $emprestimo = Emprestimo::factory()->create();
+
+        $this->json('GET', 'api/emprestimo/'.$emprestimo->id.'/usuario', ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJsonStructure(["data" => ["usuario"]]);
+    }
+
+    public function test_get_emprestimo_with_complete_detail(): void
+    {
+        $emprestimo = Emprestimo::factory()->create();
+
+        $this->json('GET', 'api/emprestimo/'.$emprestimo->id.'/completo', ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJsonStructure(["data" => ["usuario", "livro"]]);
+    }
+
+    public function test_get_emprestimo_with_book_fail(): void
+    {
+        $this->json('GET', 'api/emprestimo/1000/livro', ['Accept' => 'application/json'])
+            ->assertStatus(404)
+            ->assertJsonStructure(["message"]);
+    }
+
+    public function test_get_emprestimo_with_user_fail(): void
+    {
+        $this->json('GET', 'api/emprestimo/1000/usuario', ['Accept' => 'application/json'])
+            ->assertStatus(404)
+            ->assertJsonStructure(["message"]);
+    }
+
+    public function test_get_emprestimo_with_complete_detail_fail(): void
+    {
+        $this->json('GET', 'api/emprestimo/1000/completo', ['Accept' => 'application/json'])
+            ->assertStatus(404)
+            ->assertJsonStructure(["message"]);
+    }
 }
