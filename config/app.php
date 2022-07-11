@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pt-br',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
          */

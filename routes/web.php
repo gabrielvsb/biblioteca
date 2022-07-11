@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\EditoraController;
-use App\Http\Controllers\EmprestimoController;
-use App\Http\Controllers\LivroController;
+use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 

@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -43,9 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function emprestimos(): hasMany
+    public function loans(): hasMany
     {
-        return $this->hasMany(Emprestimo::class);
+        return $this->hasMany(Loan::class);
     }
 
 

@@ -7,9 +7,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
+    const ROLE_READER = 'reader';
+
     public function register(Request $request): JsonResponse
     {
         $request->validate([
@@ -24,9 +27,19 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
+        $role = Role::findByName(self::ROLE_READER);
+        $user->assignRole($role->id);
+
         $token = $user->createToken('token')->plainTextToken;
 
-        return response()->json(['user' => $user, 'token' => $token], 201);
+        return response()->json([
+            'message' => 'Usuário registrado com sucesso!',
+            'usuario' => [
+                'nome' => $user->name,
+                'email' => $user->email
+            ],
+            'token' => $token
+        ], 201);
     }
 
     public function login(Request $request): JsonResponse
