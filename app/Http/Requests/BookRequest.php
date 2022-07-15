@@ -23,7 +23,6 @@ class BookRequest extends FormRequest
             'description' => ['string', 'max:255'],
             'release_date' => ['required', 'before_or_equal:today', 'date'],
             'id_publisher' => ['required', 'exists:publishers,id'],
-            'total_amount' => ['required','digits_between:0,20'],
             'active' => ['boolean'],
             'id_author' => ['required', 'exists:authors,id'],
         ];
@@ -36,7 +35,6 @@ class BookRequest extends FormRequest
             'description' => ['string', 'max:255'],
             'release_date' => ['before_or_equal:today', 'date'],
             'id_publisher' => ['exists:publishers,id'],
-            'total_amount' => ['digits_between:0,20'],
             'active' => ['boolean'],
             'id_author' => ['exists:authors,id'],
         ];

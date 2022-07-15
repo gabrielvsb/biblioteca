@@ -18,7 +18,6 @@ class Book extends Model
         'description',
         'release_date',
         'id_publisher',
-        'total_amount',
         'active',
         'id_author'
     ];
@@ -33,8 +32,8 @@ class Book extends Model
         return $this->belongsTo(Author::class);
     }
 
-    public function loans(): hasMany
+    public function copies(): hasMany
     {
-        return $this->hasMany(Loan::class, 'id_book');
+        return $this->hasMany(Copy::class, 'id_book');
     }
 }

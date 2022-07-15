@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\PublisherController;
-use App\Http\Controllers\LoanController;
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\{AuthController,
+    AuthorController,
+    CopyController,
+    PublisherController,
+    LoanController,
+    BookController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,39 @@ Route::controller(AuthorController::class)->prefix('author')->name('author.')->g
     });
 });
 
+Route::controller(CopyController::class)->middleware(['auth:sanctum'])->prefix('copy')->name('copy.')->group(function (){
+    Route::get('/',  'index')
+        ->name('index')
+        ->middleware([
+            'role:admin|employee',
+            'permission:view_copy_list'
+        ]);
+    Route::get('/{id}', 'show')
+        ->name('show')
+        ->middleware([
+            'role:admin|employee',
+            'permission:view_copy_detail'
+        ]);
+    Route::put('/{id}', 'update')
+        ->name('update')
+        ->middleware([
+            'role:admin|employee',
+            'permission:update_copy'
+        ]);
+    Route::post('/', 'store')
+        ->name('store')
+        ->middleware([
+            'role:admin|employee',
+            'permission:create_copy'
+        ]);
+    Route::delete('/{id}', 'destroy')
+        ->name('destroy')
+        ->middleware([
+            'role:admin',
+            'permission:delete_copy'
+        ]);
+});
+
 Route::controller(BookController::class)->prefix('book')->name('book.')->group(function (){
     Route::get('/',  'index')->name('index');
     Route::get('/{id}', 'show')->name('show');
@@ -72,11 +106,11 @@ Route::controller(BookController::class)->prefix('book')->name('book.')->group(f
     Route::get('/{id}/publisher', 'showWithPublisher')->name('showpublisher');
 
     Route::middleware(['auth:sanctum'])->group(function (){
-        Route::get('/{id}/loans', 'showWithLoans')
-            ->name('showloans')
+        Route::get('/{id}/copies', 'showWithCopies')
+            ->name('showcopies')
             ->middleware([
                 'role:admin|employee',
-                'permission:view_book_loans'
+                'permission:view_book_copies'
             ]);
         Route::put('/{id}', 'update')
             ->name('update')

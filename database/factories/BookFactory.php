@@ -18,7 +18,6 @@ class BookFactory extends Factory
             'description'        => $this->faker->paragraph(1),
             'release_date'       => $this->faker->date(),
             'id_publisher'       => self::factoryForModel(Publisher::class)->create()->id,
-            'total_amount'       => $this->faker->randomNumber(),
             'active'             => true,
             'id_author'          => self::factoryForModel(Author::class)->create()->id
         ];

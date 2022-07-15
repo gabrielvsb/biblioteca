@@ -42,10 +42,10 @@ class BookController extends Controller
         }
     }
 
-    public function showWithLoans(int $bookId): JsonResponse
+    public function showWithCopies(int $bookId): JsonResponse
     {
         try {
-            $book = $this->bookService->detailsWithLoans($bookId);
+            $book = $this->bookService->detailsWithCopies($bookId);
             return response()->json(['data' => $book]);
         }catch (JsonException $jsonException){
             return response()->json(['message' => $jsonException->getMessage()], 404);

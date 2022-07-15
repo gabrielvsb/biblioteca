@@ -19,7 +19,7 @@ class PermissionSeeder extends Seeder
             'update_loan',
             'delete_loan',
             'create_book',
-            'view_book_loans',
+            'view_book_copies',
             'update_book',
             'delete_book',
             'create_author',
@@ -28,6 +28,11 @@ class PermissionSeeder extends Seeder
             'create_publisher',
             'update_publisher',
             'delete_publisher',
+            'create_copy',
+            'view_copy_detail',
+            'view_copy_list',
+            'update_copy',
+            'delete_copy'
         ];
         foreach ($permissions as $name){
             Permission::create([

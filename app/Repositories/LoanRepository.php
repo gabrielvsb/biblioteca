@@ -23,12 +23,12 @@ class LoanRepository extends BaseRepository
 
     public function withBook(int $loanId): object|null
     {
-        return $this->loan::with('book')->find($loanId);
+        return $this->loan::with('copy.book')->find($loanId);
     }
 
     public function complete(int $loanId): object|null
     {
-        return $this->loan::with(['user', 'book'])->find($loanId);
+        return $this->loan::with(['user', 'copy.book'])->find($loanId);
     }
 
 

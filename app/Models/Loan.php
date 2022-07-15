@@ -12,7 +12,7 @@ class Loan extends Model
 
     protected $fillable = [
         'id_user',
-        'id_book',
+        'id_copy',
         'date_start',
         'date_end',
         'active'
@@ -23,8 +23,8 @@ class Loan extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function book(): belongsTo
+    public function copy(): belongsTo
     {
-        return $this->belongsTo(Book::class, 'id_book');
+        return $this->belongsTo(Copy::class, 'id_copy');
     }
 }

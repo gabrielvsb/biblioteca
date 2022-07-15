@@ -20,12 +20,16 @@ class PermissionRoleSeeder extends Seeder
             'view_loan_complete',
             'update_loan',
             'create_book',
-            'view_book_loans',
+            'view_book_copies',
             'update_book',
             'create_author',
             'update_author',
             'create_publisher',
             'update_publisher',
+            'create_copy',
+            'view_copy_detail',
+            'view_copy_list',
+            'update_copy'
         ];
 
         $toReader = [

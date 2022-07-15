@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Author;
+use App\Models\Copy;
 use App\Models\Publisher;
 use App\Models\Loan;
 use App\Models\Book;
@@ -33,6 +34,7 @@ class BookTest extends TestCase
     public function test_get_all_books_fail(): void
     {
         Loan::query()->delete();
+        Copy::query()->delete();
         Book::query()->delete();
 
         $this->json('GET', 'api/book', ['Accept' => 'application/json'])
@@ -50,7 +52,6 @@ class BookTest extends TestCase
             'description'      => 'Descricao do book 1',
             'release_date'     => '2022-01-01',
             'id_publisher'     => $publisher->id,
-            'total_amount'     => rand(1,9),
             'active'           => true,
             'id_author'        => $athor->id
         ];
@@ -112,20 +113,19 @@ class BookTest extends TestCase
             ->assertJsonStructure(['message']);
     }
 
-    public function test_get_book_with_loans(): void
+    public function test_get_book_with_copies(): void
     {
-        $loan = Loan::factory()->create();
+        $copy = Copy::factory()->create();
 
         $this->actingAs($this->user)
-            ->json('GET', 'api/book/'.$loan->id_book.'/loans', ['Accept' => 'application/json'])
-            ->assertStatus(200)
-            ->assertJsonStructure(["data" => ["loans"]]);
+            ->json('GET', 'api/book/'.$copy->id_book.'/copies', ['Accept' => 'application/json'])
+            ->assertStatus(200);
     }
 
-    public function test_get_book_with_loans_fail(): void
+    public function test_get_book_with_copies_fail(): void
     {
         $this->actingAs($this->user)
-            ->json('GET', 'api/book/1000/loans', ['Accept' => 'application/json'])
+            ->json('GET', 'api/book/1000/copies', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(["message"]);
     }
@@ -155,9 +155,9 @@ class BookTest extends TestCase
             ->assertJsonStructure(["data" => ["publisher"]]);
     }
 
-    public function test_get_book_with_editora_fail(): void
+    public function test_get_book_with_publisher_fail(): void
     {
-        $this->json('GET', 'api/book/1000/editora', ['Accept' => 'application/json'])
+        $this->json('GET', 'api/book/1000/publisher', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(["message"]);
     }

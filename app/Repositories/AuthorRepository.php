@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Author;
-use App\Models\Publisher;
 
 class AuthorRepository extends BaseRepository
 {

@@ -40,9 +40,9 @@ class BookService
         return $book;
     }
 
-    public function detailsWithLoans(int $bookId): object|null
+    public function detailsWithCopies(int $bookId): object|null
     {
-        $book = $this->bookRepository->withLoans($bookId);
+        $book = $this->bookRepository->withCopies($bookId);
         if(!$book){
             throw new JsonException('Não foi possível buscar o livro com detalhes de emprestimos!');
         }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Copy;
 use App\Models\Loan;
 use App\Models\Book;
 use App\Models\User;
@@ -45,11 +46,11 @@ class LoanTest extends TestCase
     public function test_insert_loan(): void
     {
         $user = User::factory()->create();
-        $book = Book::factory()->create();
+        $copy = Copy::factory()->create();
 
         $loanAtributos = [
             'id_user' => $user->id,
-            'id_book' => $book->id,
+            'id_copy' => $copy->id,
         ];
 
         $this->actingAs($this->user)
@@ -117,7 +118,7 @@ class LoanTest extends TestCase
         $this->actingAs($this->user)
             ->json('GET', 'api/loan/'.$loan->id.'/book', ['Accept' => 'application/json'])
             ->assertStatus(200)
-            ->assertJsonStructure(["data" => ["book"]]);
+            ->assertJsonStructure(["data" => ["copy" => ["book"]]]);
     }
 
     public function test_get_loan_with_user(): void
@@ -137,7 +138,7 @@ class LoanTest extends TestCase
         $this->actingAs($this->user)
             ->json('GET', 'api/loan/'.$loan->id.'/complete', ['Accept' => 'application/json'])
             ->assertStatus(200)
-            ->assertJsonStructure(["data" => ["user", "book"]]);
+            ->assertJsonStructure(["data" => ["user", "copy" => ["book"]]]);
     }
 
     public function test_get_loan_with_book_fail(): void
@@ -159,7 +160,7 @@ class LoanTest extends TestCase
     public function test_get_loan_with_complete_detail_fail(): void
     {
         $this->actingAs($this->user)
-            ->json('GET', 'api/loan/1000/completo', ['Accept' => 'application/json'])
+            ->json('GET', 'api/loan/1000/complete', ['Accept' => 'application/json'])
             ->assertStatus(404)
             ->assertJsonStructure(["message"]);
     }

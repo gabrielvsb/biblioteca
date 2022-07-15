@@ -15,9 +15,9 @@ class BookRepository extends BaseRepository
         $this->book = $book;
     }
 
-    public function withLoans(int $bookId): object|null
+    public function withCopies(int $bookId): object|null
     {
-        return $this->book::with('loans')->find($bookId);
+        return $this->book::with('copies')->find($bookId);
     }
 
     public function withAuthor(int $bookId): object|null

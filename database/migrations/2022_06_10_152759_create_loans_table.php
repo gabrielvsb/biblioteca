@@ -10,8 +10,8 @@ class CreateLoansTable extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->constrained('users');
-            $table->foreignId('id_book')->constrained('books');
+            $table->foreignIdFor(\App\Models\User::class, 'id_user');
+            $table->foreignIdFor(\App\Models\Copy::class, 'id_copy');
             $table->date('date_start');
             $table->date('date_end');
             $table->boolean('active')->default(true);

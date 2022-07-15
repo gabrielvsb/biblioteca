@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoanRequest extends FormRequest
+class CopyRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -19,16 +19,18 @@ class LoanRequest extends FormRequest
     protected function store(): array
     {
         return [
-            'id_user' => ['required', 'exists:users,id'],
-            'id_copy' => ['required', 'exists:copies,id']
+            'isbn' => ['required','string'],
+            'id_book' => ['required','exists:books,id'],
+            'status' => ['required','string'],
         ];
     }
 
     protected function update(): array
     {
         return [
-            'id_user' => ['exists:users,id'],
-            'id_copy' => ['exists:copies,id']
+            'isbn' => ['string'],
+            'id_book' => ['exists:books,id'],
+            'status' => ['string'],
         ];
     }
 }

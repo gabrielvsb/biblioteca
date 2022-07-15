@@ -14,7 +14,6 @@ class CreateBooksTable extends Migration
             $table->string('description')->nullable();
             $table->date('release_date');
             $table->foreignId('id_publisher')->constrained('publishers');
-            $table->integer('total_amount');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
